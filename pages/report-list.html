@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据报表 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><i class="fas fa-water"></i><span class="logo-text">废水处理平台</span></div>
+            <nav class="sidebar-menu">
+                <div class="menu-section"><div class="menu-label">综合看板</div>
+                    <div class="menu-item"><a href="dashboard-company.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-line"></i></span><span class="menu-text">公司级看板</span></a></div>
+                    <div class="menu-item"><a href="dashboard-project.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-bar"></i></span><span class="menu-text">项目级看板</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">设备管理</div>
+                    <div class="menu-item"><a href="device-list.html" class="menu-link"><span class="menu-icon"><i class="fas fa-list"></i></span><span class="menu-text">设备档案</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-desktop"></i></span><span class="menu-text">实时监控</span><span class="menu-arrow"><i class="fas fa-chevron-down"></i></span></a>
+                        <div class="submenu">
+                            <div class="menu-item"><a href="monitor-realtime.html" class="menu-link"><span class="menu-text">实时数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-history.html" class="menu-link"><span class="menu-text">历史数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-alarm.html" class="menu-link"><span class="menu-text">报警管理</span></a></div>
+                            <div class="menu-item"><a href="monitor-video.html" class="menu-link"><span class="menu-text">视频监控</span></a></div>
+                            <div class="menu-item"><a href="monitor-digitaltwin.html" class="menu-link"><span class="menu-text">数字孪生</span></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-section"><div class="menu-label">统计分析</div>
+                    <div class="menu-item"><a href="report-list.html" class="menu-link active"><span class="menu-icon"><i class="fas fa-file-alt"></i></span><span class="menu-text">数据报表</span></a></div>
+                    <div class="menu-item"><a href="report-energy.html" class="menu-link"><span class="menu-icon"><i class="fas fa-bolt"></i></span><span class="menu-text">能耗统计</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">系统管理</div>
+                    <div class="menu-item"><a href="user-manage.html" class="menu-link"><span class="menu-icon"><i class="fas fa-users"></i></span><span class="menu-text">人员管理</span></a></div>
+                    <div class="menu-item"><a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-cog"></i></span><span class="menu-text">系统设置</span></a></div>
+                </div>
+            </nav>
+        </aside>
+        <div class="sidebar-overlay"></div>
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn"><i class="fas fa-bars"></i></button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item"><a href="../index.html">首页</a></span>
+                        <span class="breadcrumb-item">统计分析</span>
+                        <span class="breadcrumb-item">数据报表</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn"><i class="fas fa-bell"></i><span class="badge-count">3</span></button>
+                    <button class="header-action fullscreen-btn"><i class="fas fa-expand"></i></button>
+                    <div class="user-info"><div class="user-avatar">A</div><div class="user-details"><div class="user-name">管理员</div><div class="user-role">系统管理员</div></div></div>
+                    <a href="../index.html" class="header-action logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header"><h1 class="page-title">数据报表</h1><p class="page-description">生成和导出各类运行数据报表</p></div>
+                    <div class="report-filters">
+                        <div class="report-filter-row">
+                            <div class="report-filter-item">
+                                <label class="form-label">报表类型</label>
+                                <select class="form-select" id="reportType" onchange="changeReportType()">
+                                    <option value="daily">日报</option>
+                                    <option value="weekly">周报</option>
+                                    <option value="monthly">月报</option>
+                                    <option value="yearly">年报</option>
+                                    <option value="custom">自定义</option>
+                                </select>
+                            </div>
+                            <div class="report-filter-item" id="dateRangeContainer">
+                                <label class="form-label">日期范围</label>
+                                <input type="date" class="form-input" id="reportDate">
+                            </div>
+                            <div class="report-filter-item">
+                                <label class="form-label">项目</label>
+                                <select class="form-select" id="reportProject">
+                                    <option value="">所有项目</option>
+                                </select>
+                            </div>
+                            <div class="report-filter-item">
+                                <button class="btn btn-primary" onclick="generateReport()"><i class="fas fa-file-alt"></i> 生成报表</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0 -8px;">
+                        <div class="col-3" style="padding: 0 8px;">
+                            <div class="report-type-card" onclick="selectReportType('daily')">
+                                <i class="fas fa-calendar-day"></i>
+                                <h3>日报</h3>
+                                <p>每日运行数据汇总</p>
+                            </div>
+                        </div>
+                        <div class="col-3" style="padding: 0 8px;">
+                            <div class="report-type-card" onclick="selectReportType('weekly')">
+                                <i class="fas fa-calendar-week"></i>
+                                <h3>周报</h3>
+                                <p>每周运行数据汇总</p>
+                            </div>
+                        </div>
+                        <div class="col-3" style="padding: 0 8px;">
+                            <div class="report-type-card" onclick="selectReportType('monthly')">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h3>月报</h3>
+                                <p>每月运行数据汇总</p>
+                            </div>
+                        </div>
+                        <div class="col-3" style="padding: 0 8px;">
+                            <div class="report-type-card" onclick="selectReportType('yearly')">
+                                <i class="fas fa-calendar"></i>
+                                <h3>年报</h3>
+                                <p>每年运行数据汇总</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-16" style="padding: 16px 8px;">
+                        <div class="card-header">
+                            <span class="card-title" id="reportTitle">2025年2月2日 运行日报</span>
+                            <div>
+                                <button class="btn btn-sm btn-default" onclick="printReport()"><i class="fas fa-print"></i> 打印</button>
+                                <button class="btn btn-sm btn-default" onclick="exportReport()"><i class="fas fa-download"></i> 导出</button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="reportContent">
+                            <div id="reportSummary">
+                                <h4 style="margin-bottom: 16px;">一、运行概况</h4>
+                                <table class="table">
+                                    <tr><td style="width: 150px; font-weight: bold;">报表日期</td><td>2025年2月2日</td></tr>
+                                    <tr><td style="font-weight: bold;">运行设备数</td><td>65台</td></tr>
+                                    <tr><td style="font-weight: bold;">设备运行率</td><td>86.7%</td></tr>
+                                    <tr><td style="font-weight: bold;">总处理量</td><td>12,580 m³</td></tr>
+                                    <tr><td style="font-weight: bold;">总能耗</td><td>18,250 kWh</td></tr>
+                                    <tr><td style="font-weight: bold;">报警次数</td><td>8次</td></tr>
+                                </table>
+                            </div>
+                            <div id="reportChart" style="height: 300px; margin: 24px 0;"></div>
+                            <div id="reportDetail">
+                                <h4 style="margin: 24px 0 16px;">二、各项目运行数据</h4>
+                                <table class="table">
+                                    <thead>
+                                        <tr><th>项目名称</th><th>设备数</th><th>运行时间</th><th>处理量(m³)</th><th>能耗(kWh)</th><th>报警次数</th></tr>
+                                    </thead>
+                                    <tbody id="projectDataBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let reportChart=null;
+        document.addEventListener('DOMContentLoaded',function(){initProjectSelect();loadProjectData();initReportChart();});
+        function initProjectSelect(){const select=document.getElementById('reportProject');mockData.projects.forEach(project=>{const option=document.createElement('option');option.value=project.id;option.textContent=project.name;select.appendChild(option);});}
+        function selectReportType(type){document.getElementById('reportType').value=type;generateReport();}
+        function changeReportType(){const type=document.getElementById('reportType').value;const dateContainer=document.getElementById('dateRangeContainer');if(type==='custom'){dateContainer.innerHTML=`<label class="form-label">日期范围</label><div style="display: flex; gap: 8px;"><input type="date" class="form-input" id="startDate"><input type="date" class="form-input" id="endDate"></div>`;}else{const date=new Date().toISOString().split('T')[0];dateContainer.innerHTML=`<label class="form-label">日期</label><input type="date" class="form-input" id="reportDate" value="${date}">`;}}
+        function generateReport(){const type=document.getElementById('reportType').value;const titles={daily:'运行日报',weekly:'运行周报',monthly:'运行月报',yearly:'运行年报',custom:'自定义报表'};const today=new Date().toLocaleDateString('zh-CN');document.getElementById('reportTitle').textContent=`${today} ${titles[type]}`;app.showToast('报表生成成功','success');updateChart();loadProjectData();}
+        function loadProjectData(){const tbody=document.getElementById('projectDataBody');tbody.innerHTML=mockData.projects.map(project=>`<tr><td>${project.name}</td><td>${project.deviceCount}</td><td>${Math.floor(Math.random()*12+12)}小时</td><td>${Math.floor(Math.random()*2000+1000)}</td><td>${Math.floor(Math.random()*3000+1000)}</td><td>${project.alarmCount}</td></tr>`).join('');}
+        function initReportChart(){reportChart=echarts.init(document.getElementById('reportChart'));const option={tooltip:{trigger:'axis'},legend:{data:['处理量','能耗']},xAxis:{type:'category',data:mockData.projects.map(p=>p.name.slice(0,4))},yAxis:[{type:'value',name:'处理量(m³)'},{type:'value',name:'能耗(kWh)'}],series:[{name:'处理量',type:'bar',data:mockData.projects.map(()=>Math.floor(Math.random()*2000+1000))},{name:'能耗',type:'line',yAxisIndex:1,data:mockData.projects.map(()=>Math.floor(Math.random()*3000+1000))}]};reportChart.setOption(option);window.addEventListener('resize',()=>reportChart.resize());}
+        function updateChart(){const data=mockData.energyHistory.slice(-7);reportChart.setOption({xAxis:{data:data.map(d=>d.date.slice(5))},series:[{name:'处理量',data:data.map(()=>Math.floor(Math.random()*2000+1000))},{name:'能耗',data:data.map(d=>Math.floor(d.totalEnergy/10))}]});}
+        function printReport(){app.printPage();}
+        function exportReport(){const reportData=[{日期:new Date().toLocaleDateString(),设备数:mockData.statistics.totalDevices,运行设备:mockData.statistics.runningDevices,报警次数:mockData.statistics.totalAlarms}];app.exportToCsv(reportData,`报表_${new Date().toISOString().split('T')[0]}.csv`);app.showToast('报表导出成功','success');}
+    </script>
+</body>
+</html>

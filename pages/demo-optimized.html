@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优化效果演示 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- 侧边栏将由组件加载 -->
+        <div class="sidebar-placeholder"></div>
+        <div class="sidebar-overlay"></div>
+
+        <main class="main-content">
+            <!-- 顶部栏将由组件加载 -->
+            <div class="header-placeholder"></div>
+
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header">
+                        <h1 class="page-title">✨ 优化效果演示</h1>
+                        <p class="page-description">展示所有新功能和优化效果</p>
+                    </div>
+
+                    <!-- 主题切换演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>🎨 主题系统</h3>
+                        </div>
+                        <div class="card-body">
+                            <p style="margin-bottom: 16px;">点击右上角的月亮/太阳图标切换暗黑主题</p>
+                            <div class="demo-theme-preview">
+                                <div class="stat-card" style="margin-right: 16px;">
+                                    <div class="stat-card-title">亮色主题卡片</div>
+                                    <div class="stat-card-value">1234</div>
+                                </div>
+                                <div class="stat-card glass">
+                                    <div class="stat-card-title">玻璃拟态效果</div>
+                                    <div class="stat-card-value">5678</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 动画效果演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>✨ 动画效果</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                <button class="btn btn-primary" onclick="app.utils.animation.countUp(document.getElementById('countUpDemo'), 1000, 1500)">
+                                    数字滚动
+                                </button>
+                                <button class="btn btn-success" onclick="document.getElementById('fadeDemo').classList.add('fade-in')">
+                                    淡入动画
+                                </button>
+                                <button class="btn btn-warning" onclick="document.getElementById('pulseDemo').classList.add('pulse')">
+                                    脉冲动画
+                                </button>
+                                <button class="btn btn-danger" onclick="document.getElementById('shakeDemo').classList.add('shake')">
+                                    摇晃动画
+                                </button>
+                            </div>
+
+                            <div style="margin-top: 24px; padding: 24px; background: var(--bg-color); border-radius: 8px;">
+                                <div id="countUpDemo" style="font-size: 48px; font-weight: bold; color: var(--primary-color);">0</div>
+                                <div id="fadeDemo" style="padding: 16px; background: var(--success-color); color: white; border-radius: 4px; margin-top: 16px; opacity: 0;">淡入效果</div>
+                                <div id="pulseDemo" style="width: 60px; height: 60px; background: var(--warning-color); border-radius: 50%; margin-top: 16px;"></div>
+                                <div id="shakeDemo" style="padding: 16px; background: var(--danger-color); color: white; border-radius: 4px; margin-top: 16px;">摇晃效果</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 废水类型演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>🏷️ 废水类型系统</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="typeIconsDemo"></div>
+                            <div id="typeTagsDemo" style="margin-top: 16px;"></div>
+                            <div id="typeFilterDemo" style="margin-top: 24px;"></div>
+                            <div id="typeCardsDemo" style="margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 玻璃拟态演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>💎 玻璃拟态效果</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                                <div class="card glass">
+                                    <div class="card-body">
+                                        <h4>玻璃卡片</h4>
+                                        <p>半透明背景 + 模糊效果</p>
+                                    </div>
+                                </div>
+                                <div class="card glass-light">
+                                    <div class="card-body">
+                                        <h4>轻度玻璃</h4>
+                                        <p>更透明</p>
+                                    </div>
+                                </div>
+                                <div class="card glass-dark">
+                                    <div class="card-body">
+                                        <h4>重度玻璃</h4>
+                                        <p>更不透明</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 状态灯演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>🔴 状态指示灯</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>设备名称</th>
+                                        <th>类型</th>
+                                        <th>状态</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1号处理设备</td>
+                                        <td>生活污水</td>
+                                        <td>
+                                            <span class="status-indicator">
+                                                <span class="status-dot running"></span>
+                                                <span class="status-text">运行中</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2号处理设备</td>
+                                        <td>隧道废水</td>
+                                        <td>
+                                            <span class="status-indicator">
+                                                <span class="status-dot warning"></span>
+                                                <span class="status-text">警告</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3号处理设备</td>
+                                        <td>拌合站废水</td>
+                                        <td>
+                                            <span class="status-indicator">
+                                                <span class="status-dot error"></span>
+                                                <span class="status-text">故障</span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 骨架屏演示 -->
+                    <div class="card" style="margin-bottom: 24px;">
+                        <div class="card-header">
+                            <h3>⏳ 骨架屏加载</h3>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn btn-primary" onclick="loadSkeletonDemo()">模拟加载</button>
+                            <div style="margin-top: 16px;">
+                                <div id="skeletonDemo" class="skeleton" style="height: 80px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <span>加载中...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast通知容器 -->
+    <div id="toastContainer"></div>
+
+    <!-- 脚本加载 -->
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../js/utils/animation.js"></script>
+    <script src="../js/components/typeIcons.js"></script>
+
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', async function() {
+            // 加载布局组件
+            await app.components.loadLayout(
+                'demo-optimized',
+                [],
+                [
+                    { text: '首页', href: '../index.html' },
+                    { text: '优化效果演示' }
+                ]
+            );
+
+            // 初始化演示内容
+            initTypeDemos();
+
+            // 绑定按钮波纹效果
+            app.utils.animation.bindRippleEffect();
+
+            // 显示欢迎提示
+            setTimeout(() => {
+                app.showToast('欢迎使用优化版平台!', 'success');
+            }, 500);
+        });
+
+        // 初始化类型演示
+        function initTypeDemos() {
+            // 类型图标
+            const types = ['生活污水', '隧道废水', '拌合站废水', '砂石废水'];
+            const iconsHtml = types.map(type => app.getTypeIcon(type, 48)).join('');
+            document.getElementById('typeIconsDemo').innerHTML = `
+                <div style="display: flex; gap: 16px; align-items: center;">${iconsHtml}</div>
+            `;
+
+            // 类型标签
+            const tagsHtml = types.map(type => app.getTypeTag(type)).join(' ');
+            document.getElementById('typeTagsDemo').innerHTML = tagsHtml;
+
+            // 类型过滤器
+            const filterHtml = app.components.typeIcons.getFilter('all');
+            document.getElementById('typeFilterDemo').innerHTML = filterHtml;
+
+            // 类型统计卡片
+            const cardsHtml = types.map((type, index) => {
+                return app.components.typeIcons.getStatCard(type, Math.floor(Math.random() * 50) + 10, index % 3);
+            }).join('');
+            document.getElementById('typeCardsDemo').innerHTML = cardsHtml;
+        }
+
+        // 骨架屏加载演示
+        function loadSkeletonDemo() {
+            const container = document.getElementById('skeletonDemo');
+            container.classList.add('skeleton');
+
+            app.utils.animation.loadWithSkeleton(
+                container,
+                () => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve({ message: '加载完成' });
+                        }, 2000);
+                    });
+                },
+                (data) => {
+                    container.classList.remove('skeleton');
+                    container.innerHTML = `
+                        <div style="text-align: center;">
+                            <i class="fas fa-check-circle" style="font-size: 32px; color: var(--success-color);"></i>
+                            <p style="margin-top: 8px;">${data.message}</p>
+                        </div>
+                    `;
+                    container.classList.add('fade-in');
+                    app.showToast('数据加载成功!', 'success');
+                }
+            );
+        }
+    </script>
+</body>
+</html>

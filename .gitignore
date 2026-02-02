@@ -1,0 +1,62 @@
+# 操作系统文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 编辑器和IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# 临时文件
+*.tmp
+*.temp
+*.log
+*.cache
+
+# 备份文件
+*.bak
+*.backup
+
+# Node.js (如果有)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (如果有)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 构建产物
+dist/
+build/
+*.min.js
+*.min.css
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 打包文件
+*.zip
+*.tar.gz
+*.rar
+
+# 截图和临时图片
+ScreenShot_*.png
+*.png.backup

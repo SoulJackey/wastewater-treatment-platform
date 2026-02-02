@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目级BI看板 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-water"></i>
+                <span class="logo-text">废水处理平台</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-label">综合看板</div>
+                    <div class="menu-item">
+                        <a href="dashboard-company.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
+                            <span class="menu-text">公司级看板</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="dashboard-project.html" class="menu-link active">
+                            <span class="menu-icon"><i class="fas fa-chart-bar"></i></span>
+                            <span class="menu-text">项目级看板</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">设备管理</div>
+                    <div class="menu-item">
+                        <a href="device-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-list"></i></span>
+                            <span class="menu-text">设备档案</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-desktop"></i></span>
+                            <span class="menu-text">实时监控</span>
+                            <span class="menu-arrow"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <div class="submenu">
+                            <div class="menu-item">
+                                <a href="monitor-realtime.html" class="menu-link">
+                                    <span class="menu-text">实时数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-history.html" class="menu-link">
+                                    <span class="menu-text">历史数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-alarm.html" class="menu-link">
+                                    <span class="menu-text">报警管理</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-video.html" class="menu-link">
+                                    <span class="menu-text">视频监控</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-digitaltwin.html" class="menu-link">
+                                    <span class="menu-text">数字孪生</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">统计分析</div>
+                    <div class="menu-item">
+                        <a href="report-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-file-alt"></i></span>
+                            <span class="menu-text">数据报表</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="report-energy.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-bolt"></i></span>
+                            <span class="menu-text">能耗统计</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">系统管理</div>
+                    <div class="menu-item">
+                        <a href="user-manage.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-users"></i></span>
+                            <span class="menu-text">人员管理</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-cog"></i></span>
+                            <span class="menu-text">系统设置</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="sidebar-overlay"></div>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item">
+                            <a href="../index.html">首页</a>
+                        </span>
+                        <span class="breadcrumb-item">
+                            <a href="dashboard-company.html">综合看板</a>
+                        </span>
+                        <span class="breadcrumb-item">项目级看板</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">3</span>
+                    </button>
+                    <button class="header-action fullscreen-btn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">A</div>
+                        <div class="user-details">
+                            <div class="user-name">管理员</div>
+                            <div class="user-role">系统管理员</div>
+                        </div>
+                    </div>
+                    <a href="../index.html" class="header-action logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header">
+                        <h1 class="page-title" id="projectTitle">XX隧道工程</h1>
+                        <p class="page-description" id="projectDescription">项目详细信息和运行状态</p>
+                    </div>
+
+                    <!-- 项目基本信息 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">项目基本信息</span>
+                            <span class="card-extra">
+                                <button class="btn btn-sm btn-default" onclick="app.showModal('projectModal')">
+                                    <i class="fas fa-edit"></i> 编辑
+                                </button>
+                            </span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">项目名称</div>
+                                        <div class="device-param-value" id="projectName">XX隧道工程</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">项目类型</div>
+                                        <div class="device-param-value" id="projectType">隧道废水</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">项目地点</div>
+                                        <div class="device-param-value" id="projectLocation">四川省成都市</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">开工日期</div>
+                                        <div class="device-param-value" id="projectStartDate">2023-01-15</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-16">
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">设备总数</div>
+                                        <div class="device-param-value" id="projectDeviceCount">8台</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">运行设备</div>
+                                        <div class="device-param-value text-success" id="projectRunningDevices">7台</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">报警数量</div>
+                                        <div class="device-param-value text-danger" id="projectAlarmCount">2条</div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="device-param">
+                                        <div class="device-param-label">项目进度</div>
+                                        <div class="device-param-value" id="projectProgress">75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- 设备运转时长趋势 -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">设备运转时长趋势（近7天）</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="runtimeChart" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 能耗趋势 -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">能耗趋势（近7天）</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="energyChart" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- 设备状态概览 -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">设备状态概览</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="deviceStatusChart" style="height: 300px;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 实时报警列表 -->
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">实时报警</span>
+                                    <a href="monitor-alarm.html" class="btn btn-sm btn-default">
+                                        查看全部
+                                    </a>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <div id="projectAlarmList" style="max-height: 300px; overflow-y: auto;">
+                                        <!-- 报警数据将通过JS动态生成 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 设备列表 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">设备列表</span>
+                            <div class="card-extra">
+                                <button class="btn btn-sm btn-primary" onclick="window.location.href='../index.html'">
+                                    <i class="fas fa-plus"></i> 添加设备
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>设备编号</th>
+                                        <th>设备名称</th>
+                                        <th>设备类型</th>
+                                        <th>状态</th>
+                                        <th>运行时长</th>
+                                        <th>今日能耗</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="projectDeviceList">
+                                    <!-- 设备数据将通过JS动态生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let currentProject = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initDashboard();
+        });
+
+        function initDashboard() {
+            // 获取URL参数中的项目ID
+            const projectId = app.getUrlParam('id') || '1';
+            currentProject = mockData.projects.find(p => p.id == projectId) || mockData.projects[0];
+
+            loadProjectInfo();
+            initRuntimeChart();
+            initEnergyChart();
+            initDeviceStatusChart();
+            loadProjectAlarms();
+            loadProjectDevices();
+
+            // 自动刷新
+            setInterval(refreshData, 10000);
+        }
+
+        function loadProjectInfo() {
+            document.getElementById('projectTitle').textContent = currentProject.name;
+            document.getElementById('projectName').textContent = currentProject.name;
+            document.getElementById('projectType').textContent = currentProject.type;
+            document.getElementById('projectLocation').textContent = currentProject.address;
+            document.getElementById('projectStartDate').textContent = currentProject.startDate;
+            document.getElementById('projectDeviceCount').textContent = currentProject.deviceCount + '台';
+            document.getElementById('projectRunningDevices').textContent = currentProject.runningDevices + '台';
+            document.getElementById('projectAlarmCount').textContent = currentProject.alarmCount + '条';
+            document.getElementById('projectProgress').textContent = currentProject.progress + '%';
+        }
+
+        function initRuntimeChart() {
+            const chart = echarts.init(document.getElementById('runtimeChart'));
+            const data = mockData.energyHistory.slice(-7);
+
+            const option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['设备1', '设备2', '设备3']
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data.map(item => item.date.slice(5))
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '小时'
+                },
+                series: [
+                    {
+                        name: '设备1',
+                        type: 'line',
+                        data: data.map(() => Math.floor(Math.random() * 8) + 16),
+                        smooth: true
+                    },
+                    {
+                        name: '设备2',
+                        type: 'line',
+                        data: data.map(() => Math.floor(Math.random() * 8) + 16),
+                        smooth: true
+                    },
+                    {
+                        name: '设备3',
+                        type: 'line',
+                        data: data.map(() => Math.floor(Math.random() * 8) + 16),
+                        smooth: true
+                    }
+                ]
+            };
+
+            chart.setOption(option);
+            window.addEventListener('resize', () => chart.resize());
+        }
+
+        function initEnergyChart() {
+            const chart = echarts.init(document.getElementById('energyChart'));
+            const data = mockData.energyHistory.slice(-7);
+
+            const option = {
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: '{b}<br/>{a}: {c} kWh'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: data.map(item => item.date.slice(5))
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'kWh'
+                },
+                series: [
+                    {
+                        name: '能耗',
+                        type: 'bar',
+                        data: data.map(item => Math.floor(item.totalEnergy / 10)),
+                        itemStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [
+                                    { offset: 0, color: '#1890ff' },
+                                    { offset: 1, color: '#40a9ff' }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            };
+
+            chart.setOption(option);
+            window.addEventListener('resize', () => chart.resize());
+        }
+
+        function initDeviceStatusChart() {
+            const chart = echarts.init(document.getElementById('deviceStatusChart'));
+
+            const option = {
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    right: 10,
+                    top: 'center'
+                },
+                series: [
+                    {
+                        name: '设备状态',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        data: [
+                            { value: currentProject.runningDevices, name: '运行中', itemStyle: { color: '#52c41a' } },
+                            { value: currentProject.deviceCount - currentProject.runningDevices, name: '停止/故障', itemStyle: { color: '#f5222d' } }
+                        ]
+                    }
+                ]
+            };
+
+            chart.setOption(option);
+            window.addEventListener('resize', () => chart.resize());
+        }
+
+        function loadProjectAlarms() {
+            const container = document.getElementById('projectAlarmList');
+            const alarms = mockData.alarms.filter(a => a.projectName === currentProject.name).slice(0, 5);
+
+            if (alarms.length === 0) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-check-circle empty-icon"></i><p class="empty-text">暂无报警</p></div>';
+                return;
+            }
+
+            container.innerHTML = alarms.map(alarm => `
+                <div class="alarm-item">
+                    <div class="alarm-level ${alarm.level}"></div>
+                    <div class="alarm-content">
+                        <div class="alarm-title">${alarm.message}</div>
+                        <div class="alarm-time">${alarm.createTime}</div>
+                    </div>
+                    <div class="alarm-status">
+                        <span class="tag ${alarm.status === 'pending' ? 'tag-danger' : alarm.status === 'processing' ? 'tag-warning' : 'tag-success'}">
+                            ${alarm.status === 'pending' ? '未处理' : alarm.status === 'processing' ? '处理中' : '已处理'}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadProjectDevices() {
+            const container = document.getElementById('projectDeviceList');
+            const devices = mockData.devices.filter(d => d.projectId == currentProject.id);
+
+            const statusText = {
+                'running': '运行中',
+                'stopped': '已停止',
+                'warning': '警告',
+                'error': '故障'
+            };
+
+            const statusTag = {
+                'running': 'tag-success',
+                'stopped': 'tag-info',
+                'warning': 'tag-warning',
+                'error': 'tag-danger'
+            };
+
+            container.innerHTML = devices.map(device => {
+                const realtimeData = mockData.deviceRealtimeData[device.id] || {};
+                return `
+                    <tr>
+                        <td>${device.id}</td>
+                        <td>${device.name}</td>
+                        <td>${device.type}</td>
+                        <td><span class="tag ${statusTag[device.status]}">${statusText[device.status]}</span></td>
+                        <td>${Math.floor(Math.random() * 5000 + 3000)}小时</td>
+                        <td>${Math.floor(realtimeData.power || 0)} kWh</td>
+                        <td>
+                            <button class="btn btn-sm btn-default" onclick="viewDevice('${device.id}')">查看</button>
+                            <button class="btn btn-sm btn-primary" onclick="monitorDevice('${device.id}')">监控</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function viewDevice(deviceId) {
+            app.showToast('查看设备: ' + deviceId, 'info');
+        }
+
+        function monitorDevice(deviceId) {
+            window.location.href = `monitor-realtime.html?deviceId=${deviceId}`;
+        }
+
+        function refreshData() {
+            loadProjectAlarms();
+            loadProjectDevices();
+        }
+    </script>
+</body>
+</html>

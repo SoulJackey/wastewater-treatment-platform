@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史数据 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><i class="fas fa-water"></i><span class="logo-text">废水处理平台</span></div>
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-label">综合看板</div>
+                    <div class="menu-item"><a href="dashboard-company.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-line"></i></span><span class="menu-text">公司级看板</span></a></div>
+                    <div class="menu-item"><a href="dashboard-project.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-bar"></i></span><span class="menu-text">项目级看板</span></a></div>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">设备管理</div>
+                    <div class="menu-item"><a href="device-list.html" class="menu-link"><span class="menu-icon"><i class="fas fa-list"></i></span><span class="menu-text">设备档案</span></a></div>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-desktop"></i></span><span class="menu-text">实时监控</span><span class="menu-arrow expanded"><i class="fas fa-chevron-down"></i></span></a>
+                        <div class="submenu open">
+                            <div class="menu-item"><a href="monitor-realtime.html" class="menu-link"><span class="menu-text">实时数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-history.html" class="menu-link active"><span class="menu-text">历史数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-alarm.html" class="menu-link"><span class="menu-text">报警管理</span></a></div>
+                            <div class="menu-item"><a href="monitor-video.html" class="menu-link"><span class="menu-text">视频监控</span></a></div>
+                            <div class="menu-item"><a href="monitor-digitaltwin.html" class="menu-link"><span class="menu-text">数字孪生</span></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">统计分析</div>
+                    <div class="menu-item"><a href="report-list.html" class="menu-link"><span class="menu-icon"><i class="fas fa-file-alt"></i></span><span class="menu-text">数据报表</span></a></div>
+                    <div class="menu-item"><a href="report-energy.html" class="menu-link"><span class="menu-icon"><i class="fas fa-bolt"></i></span><span class="menu-text">能耗统计</span></a></div>
+                </div>
+                <div class="menu-section">
+                    <div class="menu-label">系统管理</div>
+                    <div class="menu-item"><a href="user-manage.html" class="menu-link"><span class="menu-icon"><i class="fas fa-users"></i></span><span class="menu-text">人员管理</span></a></div>
+                    <div class="menu-item"><a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-cog"></i></span><span class="menu-text">系统设置</span></a></div>
+                </div>
+            </nav>
+        </aside>
+        <div class="sidebar-overlay"></div>
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn"><i class="fas fa-bars"></i></button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item"><a href="../index.html">首页</a></span>
+                        <span class="breadcrumb-item">在线监控</span>
+                        <span class="breadcrumb-item">历史数据</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn"><i class="fas fa-bell"></i><span class="badge-count">3</span></button>
+                    <button class="header-action fullscreen-btn"><i class="fas fa-expand"></i></button>
+                    <div class="user-info"><div class="user-avatar">A</div><div class="user-details"><div class="user-name">管理员</div><div class="user-role">系统管理员</div></div></div>
+                    <a href="../index.html" class="header-action logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header"><h1 class="page-title">历史数据查询</h1><p class="page-description">查看设备历史运行数据</p></div>
+                    <div class="report-filters">
+                        <div class="report-filter-row">
+                            <div class="report-filter-item">
+                                <label class="form-label">选择设备</label>
+                                <select class="form-select" id="deviceSelect"><option value="">请选择设备</option></select>
+                            </div>
+                            <div class="report-filter-item">
+                                <label class="form-label">时间范围</label>
+                                <select class="form-select" id="timeRange">
+                                    <option value="today">今日</option>
+                                    <option value="week" selected>最近7天</option>
+                                    <option value="month">最近30天</option>
+                                    <option value="custom">自定义</option>
+                                </select>
+                            </div>
+                            <div class="report-filter-item">
+                                <label class="form-label">参数类型</label>
+                                <select class="form-select" id="paramType">
+                                    <option value="ph">PH值</option>
+                                    <option value="liquidLevel">液位</option>
+                                    <option value="flow">流量</option>
+                                    <option value="temperature">温度</option>
+                                </select>
+                            </div>
+                            <div class="report-filter-item">
+                                <button class="btn btn-primary" onclick="queryHistoryData()"><i class="fas fa-search"></i> 查询</button>
+                            </div>
+                        </div>
+                        <div class="report-filter-row" id="customDateRange" style="display:none;">
+                            <div class="report-filter-item">
+                                <label class="form-label">开始时间</label>
+                                <input type="datetime-local" class="form-input" id="startTime">
+                            </div>
+                            <div class="report-filter-item">
+                                <label class="form-label">结束时间</label>
+                                <input type="datetime-local" class="form-input" id="endTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">历史曲线图</span><button class="btn btn-sm btn-default" onclick="exportChartData()"><i class="fas fa-download"></i> 导出</button></div>
+                        <div class="card-body"><div id="historyChart" style="height:400px;"></div></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header"><span class="card-title">历史数据表格</span><button class="btn btn-sm btn-default" onclick="exportTableData()"><i class="fas fa-download"></i> 导出CSV</button></div>
+                        <div class="card-body" style="padding:0;">
+                            <table class="table">
+                                <thead><tr><th>序号</th><th>时间</th><th>PH值</th><th>液位(%)</th><th>流量(m³/h)</th><th>温度(°C)</th><th>功率(kW)</th></tr></thead>
+                                <tbody id="historyTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let historyChart=null;
+        document.addEventListener('DOMContentLoaded',function(){initDeviceSelect();initChart();document.getElementById('timeRange').addEventListener('change',function(){if(this.value==='custom'){document.getElementById('customDateRange').style.display='flex';}else{document.getElementById('customDateRange').style.display='none';}});});
+        function initDeviceSelect(){const select=document.getElementById('deviceSelect');mockData.devices.filter(d=>d.status==='running').forEach(device=>{const option=document.createElement('option');option.value=device.id;option.textContent=device.name;select.appendChild(option);});if(select.options.length>0)select.selectedIndex=0;}
+        function initChart(){historyChart=echarts.init(document.getElementById('historyChart'));const option={tooltip:{trigger:'axis'},legend:{data:['PH值','液位','流量']},xAxis:{type:'category',data:[]},yAxis:[{type:'value',name:'PH值'},{type:'value',name:'液位(%) / 流量(m³/h)'}],series:[]};historyChart.setOption(option);window.addEventListener('resize',()=>historyChart.resize());}
+        function queryHistoryData(){const deviceId=document.getElementById('deviceSelect').value;if(!deviceId){app.showToast('请选择设备','warning');return;}const timeRange=document.getElementById('timeRange').value;const paramType=document.getElementById('paramType').value;const labels=[];const data=[];const now=new Date();const days=timeRange==='today'?1:timeRange==='week'?7:timeRange==='month'?30:7;for(let i=days*24;i>=0;i-=4){const time=new Date(now-i*60*60*1000);labels.push(time.getHours().toString().padStart(2,'0')+':00');data.push((Math.random()*2+6).toFixed(1));}historyChart.setOption({xAxis:{data:labels},series:[{name:paramType==='ph'?'PH值':paramType==='liquidLevel'?'液位':'流量',type:'line',data:data,smooth:true,itemStyle:{color:'#1890ff'}}]});loadHistoryTable();app.showToast('查询成功','success');}
+        function loadHistoryTable(){const tbody=document.getElementById('historyTableBody');let html='';for(let i=1;i<=20;i++){const ph=(Math.random()*2+6).toFixed(1);const liquidLevel=(Math.random()*30+50).toFixed(1);const flow=(Math.random()*10+10).toFixed(1);const temperature=(Math.random()*5+23).toFixed(1);const power=(Math.random()*10+10).toFixed(1);const time=new Date(Date.now()-i*3600000);html+=`<tr><td>${i}</td><td>${app.formatDateTime(time,'YYYY-MM-DD HH:mm')}</td><td>${ph}</td><td>${liquidLevel}</td><td>${flow}</td><td>${temperature}</td><td>${power}</td></tr>`;}tbody.innerHTML=html;}
+        function exportChartData(){app.showToast('图表导出功能开发中','info');}
+        function exportTableData(){const data=[];const rows=document.querySelectorAll('#historyTableBody tr');rows.forEach(row=>{const cells=row.querySelectorAll('td');if(cells.length>=6){data.push({时间:cells[1].textContent,'PH值':cells[2].textContent,'液位(%)':cells[3].textContent,'流量(m³/h)':cells[4].textContent,'温度(°C)':cells[5].textContent});}});app.exportToCsv(data,'历史数据.csv');}
+    </script>
+</body>
+</html>

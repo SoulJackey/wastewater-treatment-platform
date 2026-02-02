@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报警管理 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-water"></i>
+                <span class="logo-text">废水处理平台</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-label">综合看板</div>
+                    <div class="menu-item">
+                        <a href="dashboard-company.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
+                            <span class="menu-text">公司级看板</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="dashboard-project.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-chart-bar"></i></span>
+                            <span class="menu-text">项目级看板</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">设备管理</div>
+                    <div class="menu-item">
+                        <a href="device-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-list"></i></span>
+                            <span class="menu-text">设备档案</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-desktop"></i></span>
+                            <span class="menu-text">实时监控</span>
+                            <span class="menu-arrow expanded"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <div class="submenu open">
+                            <div class="menu-item">
+                                <a href="monitor-realtime.html" class="menu-link">
+                                    <span class="menu-text">实时数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-history.html" class="menu-link">
+                                    <span class="menu-text">历史数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-alarm.html" class="menu-link active">
+                                    <span class="menu-text">报警管理</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-video.html" class="menu-link">
+                                    <span class="menu-text">视频监控</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="monitor-digitaltwin.html" class="menu-link">
+                                    <span class="menu-text">数字孪生</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">统计分析</div>
+                    <div class="menu-item">
+                        <a href="report-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-file-alt"></i></span>
+                            <span class="menu-text">数据报表</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="report-energy.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-bolt"></i></span>
+                            <span class="menu-text">能耗统计</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">系统管理</div>
+                    <div class="menu-item">
+                        <a href="user-manage.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-users"></i></span>
+                            <span class="menu-text">人员管理</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-cog"></i></span>
+                            <span class="menu-text">系统设置</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="sidebar-overlay"></div>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item">
+                            <a href="../index.html">首页</a>
+                        </span>
+                        <span class="breadcrumb-item">在线监控</span>
+                        <span class="breadcrumb-item">报警管理</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count" id="alarmBadge">3</span>
+                    </button>
+                    <button class="header-action fullscreen-btn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">A</div>
+                        <div class="user-details">
+                            <div class="user-name">管理员</div>
+                            <div class="user-role">系统管理员</div>
+                        </div>
+                    </div>
+                    <a href="../index.html" class="header-action logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header">
+                        <h1 class="page-title">报警管理</h1>
+                        <p class="page-description">查看和处理设备报警信息</p>
+                    </div>
+
+                    <!-- 报警统计卡片 -->
+                    <div class="dashboard-stats">
+                        <div class="stat-card danger">
+                            <div class="stat-card-title">
+                                <i class="fas fa-exclamation-circle"></i> 未处理报警
+                            </div>
+                            <div class="stat-card-value" id="pendingCount">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-clock"></i>
+                                <span>需要及时处理</span>
+                            </div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-card-title">
+                                <i class="fas fa-cog"></i> 处理中
+                            </div>
+                            <div class="stat-card-value" id="processingCount">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-spinner"></i>
+                                <span>正在处理</span>
+                            </div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-card-title">
+                                <i class="fas fa-check-circle"></i> 已处理
+                            </div>
+                            <div class="stat-card-value" id="processedCount">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-check"></i>
+                                <span>已完成</span>
+                            </div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-card-title">
+                                <i class="fas fa-chart-bar"></i> 今日报警
+                            </div>
+                            <div class="stat-card-value" id="todayCount">0</div>
+                            <div class="stat-card-trend">
+                                <i class="fas fa-calendar-day"></i>
+                                <span>条</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 操作栏 -->
+                    <div class="action-bar">
+                        <div class="action-bar-left">
+                            <select class="form-select filter-select" id="levelFilter">
+                                <option value="">所有级别</option>
+                                <option value="high">高级</option>
+                                <option value="medium">中级</option>
+                                <option value="low">低级</option>
+                            </select>
+                            <select class="form-select filter-select" id="statusFilter">
+                                <option value="">所有状态</option>
+                                <option value="pending">未处理</option>
+                                <option value="processing">处理中</option>
+                                <option value="processed">已处理</option>
+                            </select>
+                            <select class="form-select filter-select" id="projectFilter">
+                                <option value="">所有项目</option>
+                            </select>
+                        </div>
+                        <div class="action-bar-right">
+                            <button class="btn btn-default" onclick="exportAlarms()">
+                                <i class="fas fa-download"></i> 导出
+                            </button>
+                            <button class="btn btn-primary" onclick="batchProcess()">
+                                <i class="fas fa-check"></i> 批量处理
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 报警列表 -->
+                    <div class="card">
+                        <div class="card-body" style="padding: 0;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAll"></th>
+                                        <th>级别</th>
+                                        <th>报警类型</th>
+                                        <th>设备名称</th>
+                                        <th>项目</th>
+                                        <th>报警信息</th>
+                                        <th>报警时间</th>
+                                        <th>状态</th>
+                                        <th>处理人</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="alarmTableBody">
+                                    <!-- 报警数据将通过JS动态生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 分页 -->
+                    <div class="card">
+                        <div class="card-body" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="color: var(--text-secondary);">
+                                共 <span id="totalCount">0</span> 条记录
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn btn-sm btn-default" onclick="changePage('prev')" id="prevBtn">
+                                    <i class="fas fa-chevron-left"></i> 上一页
+                                </button>
+                                <span style="padding: 8px 16px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 4px;">
+                                    第 <span id="currentPage">1</span> / <span id="totalPages">1</span> 页
+                                </span>
+                                <button class="btn btn-sm btn-default" onclick="changePage('next')" id="nextBtn">
+                                    下一页 <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 报警详情模态框 -->
+    <div id="alarmDetailModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title">报警详情</h3>
+                <button class="modal-close" onclick="app.hideModal('alarmDetailModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="alarmDetailContent">
+                <!-- 报警详情内容将通过JS动态生成 -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" onclick="app.hideModal('alarmDetailModal')">关闭</button>
+                <button class="btn btn-primary" onclick="processAlarm()">处理报警</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let currentPage = 1;
+        const pageSize = 10;
+        let filteredAlarms = [...mockData.alarms];
+        let selectedAlarmId = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initFilters();
+            loadAlarmStatistics();
+            loadAlarmList();
+
+            // 筛选功能
+            document.getElementById('levelFilter').addEventListener('change', filterAlarms);
+            document.getElementById('statusFilter').addEventListener('change', filterAlarms);
+            document.getElementById('projectFilter').addEventListener('change', filterAlarms);
+
+            // 自动刷新
+            setInterval(loadAlarmStatistics, 30000);
+        });
+
+        function initFilters() {
+            const projectFilter = document.getElementById('projectFilter');
+            mockData.projects.forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.name;
+                option.textContent = project.name;
+                projectFilter.appendChild(option);
+            });
+        }
+
+        function loadAlarmStatistics() {
+            const stats = mockData.alarmStats;
+            document.getElementById('pendingCount').textContent = stats.pending;
+            document.getElementById('processingCount').textContent = stats.processing;
+            document.getElementById('processedCount').textContent = stats.processed;
+            document.getElementById('todayCount').textContent = stats.today;
+            document.getElementById('alarmBadge').textContent = stats.pending;
+        }
+
+        function filterAlarms() {
+            const levelValue = document.getElementById('levelFilter').value;
+            const statusValue = document.getElementById('statusFilter').value;
+            const projectValue = document.getElementById('projectFilter').value;
+
+            filteredAlarms = mockData.alarms.filter(alarm => {
+                const matchLevel = !levelValue || alarm.level === levelValue;
+                const matchStatus = !statusValue || alarm.status === statusValue;
+                const matchProject = !projectValue || alarm.projectName === projectValue;
+                return matchLevel && matchStatus && matchProject;
+            });
+
+            currentPage = 1;
+            loadAlarmList();
+        }
+
+        function loadAlarmList() {
+            const tbody = document.getElementById('alarmTableBody');
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageAlarms = filteredAlarms.slice(start, end);
+
+            const levelText = {
+                'high': '高',
+                'medium': '中',
+                'low': '低'
+            };
+
+            const levelTag = {
+                'high': 'tag-danger',
+                'medium': 'tag-warning',
+                'low': 'tag-info'
+            };
+
+            const statusText = {
+                'pending': '未处理',
+                'processing': '处理中',
+                'processed': '已处理'
+            };
+
+            const statusTag = {
+                'pending': 'tag-danger',
+                'processing': 'tag-warning',
+                'processed': 'tag-success'
+            };
+
+            tbody.innerHTML = pageAlarms.map(alarm => `
+                <tr>
+                    <td><input type="checkbox" class="alarm-checkbox" value="${alarm.id}"></td>
+                    <td><span class="tag ${levelTag[alarm.level]}">${levelText[alarm.level]}</span></td>
+                    <td>${alarm.type}</td>
+                    <td>${alarm.deviceName}</td>
+                    <td>${alarm.projectName}</td>
+                    <td>${alarm.message}</td>
+                    <td>${alarm.createTime}</td>
+                    <td><span class="tag ${statusTag[alarm.status]}">${statusText[alarm.status]}</span></td>
+                    <td>${alarm.handler || '-'}</td>
+                    <td>
+                        <button class="btn btn-sm btn-default" onclick="viewAlarmDetail('${alarm.id}')">
+                            查看
+                        </button>
+                        ${alarm.status !== 'processed' ? `
+                            <button class="btn btn-sm btn-primary" onclick="processAlarmById('${alarm.id}')">
+                                处理
+                            </button>
+                        ` : ''}
+                    </td>
+                </tr>
+            `).join('');
+
+            // 更新分页信息
+            const totalPages = Math.ceil(filteredAlarms.length / pageSize);
+            document.getElementById('totalCount').textContent = filteredAlarms.length;
+            document.getElementById('currentPage').textContent = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(filteredAlarms.length / pageSize);
+
+            if (direction === 'prev' && currentPage > 1) {
+                currentPage--;
+            } else if (direction === 'next' && currentPage < totalPages) {
+                currentPage++;
+            }
+
+            loadAlarmList();
+        }
+
+        function viewAlarmDetail(alarmId) {
+            selectedAlarmId = alarmId;
+            const alarm = mockData.alarms.find(a => a.id === alarmId);
+            if (!alarm) return;
+
+            const levelText = {
+                'high': '高',
+                'medium': '中',
+                'low': '低'
+            };
+
+            const statusText = {
+                'pending': '未处理',
+                'processing': '处理中',
+                'processed': '已处理'
+            };
+
+            const content = document.getElementById('alarmDetailContent');
+            content.innerHTML = `
+                <table class="table">
+                    <tr>
+                        <td style="width: 120px; font-weight: bold;">报警编号</td>
+                        <td>${alarm.id}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">报警级别</td>
+                        <td><span class="tag ${alarm.level === 'high' ? 'tag-danger' : alarm.level === 'medium' ? 'tag-warning' : 'tag-info'}">${levelText[alarm.level]}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">报警类型</td>
+                        <td>${alarm.type}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">设备名称</td>
+                        <td>${alarm.deviceName}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">项目名称</td>
+                        <td>${alarm.projectName}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">报警信息</td>
+                        <td>${alarm.message}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">报警时间</td>
+                        <td>${alarm.createTime}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">处理状态</td>
+                        <td><span class="tag ${alarm.status === 'pending' ? 'tag-danger' : alarm.status === 'processing' ? 'tag-warning' : 'tag-success'}">${statusText[alarm.status]}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">处理人</td>
+                        <td>${alarm.handler || '-'}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">处理时间</td>
+                        <td>${alarm.handleTime || '-'}</td>
+                    </tr>
+                </table>
+            `;
+
+            app.showModal('alarmDetailModal');
+        }
+
+        function processAlarm() {
+            if (!selectedAlarmId) return;
+
+            app.showToast('报警已标记为处理中', 'success');
+            app.hideModal('alarmDetailModal');
+
+            // 模拟更新数据
+            const alarm = mockData.alarms.find(a => a.id === selectedAlarmId);
+            if (alarm) {
+                alarm.status = 'processing';
+                alarm.handler = '管理员';
+            }
+
+            loadAlarmStatistics();
+            loadAlarmList();
+        }
+
+        function processAlarmById(alarmId) {
+            const alarm = mockData.alarms.find(a => a.id === alarmId);
+            if (!alarm) return;
+
+            alarm.status = 'processing';
+            alarm.handler = '管理员';
+
+            app.showToast('报警已标记为处理中', 'success');
+            loadAlarmStatistics();
+            loadAlarmList();
+        }
+
+        function batchProcess() {
+            const checkboxes = document.querySelectorAll('.alarm-checkbox:checked');
+            if (checkboxes.length === 0) {
+                app.showToast('请选择要处理的报警', 'warning');
+                return;
+            }
+
+            checkboxes.forEach(checkbox => {
+                const alarmId = checkbox.value;
+                const alarm = mockData.alarms.find(a => a.id === alarmId);
+                if (alarm && alarm.status !== 'processed') {
+                    alarm.status = 'processing';
+                    alarm.handler = '管理员';
+                }
+            });
+
+            app.showToast(`已批量处理 ${checkboxes.length} 条报警`, 'success');
+            loadAlarmStatistics();
+            loadAlarmList();
+        }
+
+        function exportAlarms() {
+            const exportData = filteredAlarms.map(alarm => ({
+                '报警编号': alarm.id,
+                '级别': alarm.level === 'high' ? '高' : alarm.level === 'medium' ? '中' : '低',
+                '类型': alarm.type,
+                '设备': alarm.deviceName,
+                '项目': alarm.projectName,
+                '信息': alarm.message,
+                '时间': alarm.createTime,
+                '状态': alarm.status === 'pending' ? '未处理' : alarm.status === 'processing' ? '处理中' : '已处理',
+                '处理人': alarm.handler || ''
+            }));
+
+            app.exportToCsv(exportData, '报警记录.csv');
+        }
+    </script>
+</body>
+</html>

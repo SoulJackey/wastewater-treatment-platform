@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字孪生 - 隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .digital-twin-wrapper { display: flex; gap: 16px; }
+        .digital-twin-main { flex: 1; }
+        .digital-twin-sidebar { width: 280px; }
+        .plant-layout {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .plant-building {
+            position: absolute;
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            border-radius: 4px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+        }
+        .plant-building:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .plant-pipe { position: absolute; background: #8c8c8c; border-radius: 2px; }
+        .equipment-marker {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 20px;
+            color: #fff;
+            z-index: 10;
+        }
+        .equipment-marker:hover { transform: scale(1.2); }
+        .equipment-marker.running { background-color: var(--success-color); box-shadow: 0 0 15px rgba(82,196,26,0.5); }
+        .equipment-marker.warning { background-color: var(--warning-color); box-shadow: 0 0 15px rgba(250,173,20,0.5); }
+        .equipment-marker.error { background-color: var(--danger-color); box-shadow: 0 0 15px rgba(245,34,45,0.5); }
+        .equipment-marker.offline { background-color: var(--text-disabled); }
+        .equipment-tooltip {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .equipment-marker:hover .equipment-tooltip { opacity: 1; visibility: visible; }
+        .legend-item { display: flex; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-light); }
+        .legend-dot { width: 16px; height: 16px; border-radius: 50%; margin-right: 12px; }
+        .status-panel { background: var(--card-bg); border-radius: 4px; padding: 16px; margin-bottom: 16px; }
+        .status-panel-title { font-weight: bold; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-light); }
+        .status-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .status-item { text-align: center; padding: 12px; background: #fafafa; border-radius: 4px; }
+        .status-item-value { font-size: 24px; font-weight: bold; }
+        .status-item-label { font-size: 12px; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo"><i class="fas fa-water"></i><span class="logo-text">废水处理平台</span></div>
+            <nav class="sidebar-menu">
+                <div class="menu-section"><div class="menu-label">综合看板</div>
+                    <div class="menu-item"><a href="dashboard-company.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-line"></i></span><span class="menu-text">公司级看板</span></a></div>
+                    <div class="menu-item"><a href="dashboard-project.html" class="menu-link"><span class="menu-icon"><i class="fas fa-chart-bar"></i></span><span class="menu-text">项目级看板</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">设备管理</div>
+                    <div class="menu-item"><a href="device-list.html" class="menu-link"><span class="menu-icon"><i class="fas fa-list"></i></span><span class="menu-text">设备档案</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-desktop"></i></span><span class="menu-text">实时监控</span><span class="menu-arrow expanded"><i class="fas fa-chevron-down"></i></span></a>
+                        <div class="submenu open">
+                            <div class="menu-item"><a href="monitor-realtime.html" class="menu-link"><span class="menu-text">实时数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-history.html" class="menu-link"><span class="menu-text">历史数据</span></a></div>
+                            <div class="menu-item"><a href="monitor-alarm.html" class="menu-link"><span class="menu-text">报警管理</span></a></div>
+                            <div class="menu-item"><a href="monitor-video.html" class="menu-link"><span class="menu-text">视频监控</span></a></div>
+                            <div class="menu-item"><a href="monitor-digitaltwin.html" class="menu-link active"><span class="menu-text">数字孪生</span></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-section"><div class="menu-label">统计分析</div>
+                    <div class="menu-item"><a href="report-list.html" class="menu-link"><span class="menu-icon"><i class="fas fa-file-alt"></i></span><span class="menu-text">数据报表</span></a></div>
+                    <div class="menu-item"><a href="report-energy.html" class="menu-link"><span class="menu-icon"><i class="fas fa-bolt"></i></span><span class="menu-text">能耗统计</span></a></div>
+                </div>
+                <div class="menu-section"><div class="menu-label">系统管理</div>
+                    <div class="menu-item"><a href="user-manage.html" class="menu-link"><span class="menu-icon"><i class="fas fa-users"></i></span><span class="menu-text">人员管理</span></a></div>
+                    <div class="menu-item"><a href="javascript:void(0)" class="menu-link"><span class="menu-icon"><i class="fas fa-cog"></i></span><span class="menu-text">系统设置</span></a></div>
+                </div>
+            </nav>
+        </aside>
+        <div class="sidebar-overlay"></div>
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn"><i class="fas fa-bars"></i></button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item"><a href="../index.html">首页</a></span>
+                        <span class="breadcrumb-item">在线监控</span>
+                        <span class="breadcrumb-item">数字孪生</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn"><i class="fas fa-bell"></i><span class="badge-count">3</span></button>
+                    <button class="header-action fullscreen-btn"><i class="fas fa-expand"></i></button>
+                    <div class="user-info"><div class="user-avatar">A</div><div class="user-details"><div class="user-name">管理员</div><div class="user-role">系统管理员</div></div></div>
+                    <a href="../index.html" class="header-action logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+                </div>
+            </header>
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <div class="page-header"><h1 class="page-title">数字孪生</h1><p class="page-description">可视化设备布局和实时运行状态</p></div>
+                    <div class="digital-twin-wrapper">
+                        <div class="digital-twin-main">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title"><i class="fas fa-map"></i> XX隧道工程 - 设备平面布局图</span>
+                                    <div>
+                                        <button class="btn btn-sm btn-default" onclick="zoomIn()"><i class="fas fa-search-plus"></i></button>
+                                        <button class="btn btn-sm btn-default" onclick="zoomOut()"><i class="fas fa-search-minus"></i></button>
+                                        <button class="btn btn-sm btn-default" onclick="resetView()"><i class="fas fa-compress-arrows-alt"></i></button>
+                                        <button class="btn btn-sm btn-primary" onclick="toggleAutoRefresh()"><i class="fas fa-sync-alt"></i> 自动刷新</button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="padding: 0;">
+                                    <div class="plant-layout" id="plantLayout">
+                                        <div class="plant-building" style="left: 5%; top: 10%; width: 120px; height: 80px;">综合楼</div>
+                                        <div class="plant-building" style="left: 25%; top: 5%; width: 180px; height: 100px; background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);">处理车间</div>
+                                        <div class="plant-building" style="left: 55%; top: 15%; width: 150px; height: 90px; background: linear-gradient(135deg, #faad14 0%, #d48806 100%);">污泥池</div>
+                                        <div class="plant-building" style="left: 75%; top: 5%; width: 140px; height: 70px;">出水口</div>
+                                        <div class="plant-building" style="left: 35%; top: 70%; width: 200px; height: 80px; background: linear-gradient(135deg, #722ed1 0%, #531dab 100%);">配电房</div>
+                                        <div class="plant-pipe" style="left: 20%; top: 35%; width: 250px; height: 8px;"></div>
+                                        <div class="plant-pipe" style="left: 50%; top: 40%; width: 8px; height: 150px;"></div>
+                                        <div class="plant-pipe" style="left: 50%; top: 40%; width: 150px; height: 8px;"></div>
+                                        <div class="plant-pipe" style="left: 20%; top: 60%; width: 300px; height: 8px;"></div>
+                                        <div id="equipmentMarkers"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="digital-twin-sidebar">
+                            <div class="status-panel">
+                                <div class="status-panel-title"><i class="fas fa-chart-pie"></i> 运行状态概览</div>
+                                <div class="status-grid">
+                                    <div class="status-item"><div class="status-item-value text-success" id="runningCount">0</div><div class="status-item-label">运行中</div></div>
+                                    <div class="status-item"><div class="status-item-value text-warning" id="warningCount">0</div><div class="status-item-label">警告</div></div>
+                                    <div class="status-item"><div class="status-item-value text-danger" id="errorCount">0</div><div class="status-item-label">故障</div></div>
+                                    <div class="status-item"><div class="status-item-value" id="offlineCount">0</div><div class="status-item-label">离线</div></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header"><span class="card-title">设备列表</span></div>
+                                <div class="card-body" style="padding: 0; max-height: 300px; overflow-y: auto;">
+                                    <div id="equipmentList"></div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header"><span class="card-title">图例</span></div>
+                                <div class="card-body">
+                                    <div class="legend-item"><span class="legend-dot" style="background: var(--success-color);"></span>运行正常</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background: var(--warning-color);"></span>运行警告</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background: var(--danger-color);"></span>故障停机</div>
+                                    <div class="legend-item"><span class="legend-dot" style="background: var(--text-disabled);"></span>设备离线</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="deviceDetailModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header"><h3 class="modal-title">设备详情</h3><button class="modal-close" onclick="app.hideModal('deviceDetailModal')"><i class="fas fa-times"></i></button></div>
+            <div class="modal-body" id="deviceDetailContent"></div>
+            <div class="modal-footer"><button class="btn btn-default" onclick="app.hideModal('deviceDetailModal')">关闭</button><button class="btn btn-primary" onclick="viewDeviceDetail()">查看详情</button></div>
+        </div>
+    </div>
+    <script src="../js/common.js"></script>
+    <script src="../js/data.js"></script>
+    <script>
+        let autoRefresh=true;let selectedDevice=null;
+        const equipmentData=[{id:'DEV001',name:'1号污水处理设备',type:'处理设备',status:'running',x:30,y:25,icon:'fa-cogs'},{id:'DEV002',name:'2号污水处理设备',type:'处理设备',status:'running',x:50,y:20,icon:'fa-cogs'},{id:'DEV003',name:'3号沉淀设备',type:'沉淀设备',status:'warning',x:70,y:30,icon:'fa-filter'},{id:'DEV004',name:'加药设备',type:'加药装置',status:'running',x:40,y:45,icon:'fa-prescription-bottle'},{id:'DEV005',name:'污泥脱水机',type:'脱水设备',status:'running',x:60,y:50,icon:'fa-compress'},{id:'DEV006',name:'鼓风机',type:'风机设备',status:'error',x:80,y:60,icon:'fa-fan'},{id:'DEV007',name:'提升泵',type:'泵类设备',status:'running',x:25,y:55,icon:'fa-water'},{id:'DEV008',name:'出水监测仪',type:'监测设备',status:'running',x:85,y:75,icon:'fa-chart-line'}];
+        document.addEventListener('DOMContentLoaded',function(){renderEquipmentMarkers();renderEquipmentList();updateStatusCounts();if(autoRefresh){setInterval(autoRefreshData,3000);}});
+        function renderEquipmentMarkers(){const container=document.getElementById('equipmentMarkers');container.innerHTML=equipmentData.map(eq=>`<div class="equipment-marker ${eq.status}" style="left: ${eq.x}%; top: ${eq.y * 1.2}%;" onclick="showDeviceDetail('${eq.id}')"><i class="fas ${eq.icon}"></i><div class="equipment-tooltip"><div>${eq.name}</div><div>状态: ${eq.status==='running'?'运行中':eq.status==='warning'?'警告':'故障'}</div></div></div>`).join('');}
+        function renderEquipmentList(){const container=document.getElementById('equipmentList');container.innerHTML=equipmentData.map(eq=>`<div class="alarm-item" onclick="showDeviceDetail('${eq.id}')" style="cursor: pointer;"><div class="alarm-level ${eq.status}" style="height: 30px;"></div><div class="alarm-content"><div class="alarm-title">${eq.name}</div><div class="alarm-time">${eq.type}</div></div><span class="tag ${eq.status==='running'?'tag-success':eq.status==='warning'?'tag-warning':'tag-danger'}">${eq.status==='running'?'运行中':eq.status==='warning'?'警告':'故障'}</span></div>`).join('');}
+        function updateStatusCounts(){const counts={running:0,warning:0,error:0,offline:0};equipmentData.forEach(eq=>counts[eq.status]++);document.getElementById('runningCount').textContent=counts.running;document.getElementById('warningCount').textContent=counts.warning;document.getElementById('errorCount').textContent=counts.error;document.getElementById('offlineCount').textContent=counts.offline;}
+        function showDeviceDetail(deviceId){selectedDevice=equipmentData.find(eq=>eq.id===deviceId);if(!selectedDevice)return;const realtimeData=mockData.deviceRealtimeData[deviceId]||{};const content=document.getElementById('deviceDetailContent');content.innerHTML=`<div style="text-align: center; margin-bottom: 16px;"><i class="fas ${selectedDevice.icon}" style="font-size: 48px; color: var(--primary-color);"></i><h3 style="margin: 12px 0 8px;">${selectedDevice.name}</h3><span class="tag ${selectedDevice.status==='running'?'tag-success':selectedDevice.status==='warning'?'tag-warning':'tag-danger'}">${selectedDevice.status==='running'?'运行中':selectedDevice.status==='warning'?'警告':'故障'}</span></div><table class="table"><tr><td style="font-weight: bold;">设备编号</td><td>${selectedDevice.id}</td></tr><tr><td style="font-weight: bold;">设备类型</td><td>${selectedDevice.type}</td></tr><tr><td style="font-weight: bold;">PH值</td><td>${realtimeData.ph||'-'}</td></tr><tr><td style="font-weight: bold;">液位</td><td>${realtimeData.liquidLevel||'-'}%</td></tr><tr><td style="font-weight: bold;">流量</td><td>${realtimeData.flow||'-'} m³/h</td></tr></table>`;app.showModal('deviceDetailModal');}
+        function viewDeviceDetail(){app.hideModal('deviceDetailModal');window.location.href=`device-list.html?deviceId=${selectedDevice.id}`;}
+        function zoomIn(){document.getElementById('plantLayout').style.transform='scale(1.1)';}
+        function zoomOut(){document.getElementById('plantLayout').style.transform='scale(0.9)';}
+        function resetView(){document.getElementById('plantLayout').style.transform='scale(1)';}
+        function toggleAutoRefresh(){autoRefresh=!autoRefresh;app.showToast(autoRefresh?'自动刷新已开启':'自动刷新已关闭',autoRefresh?'success':'warning');}
+        function autoRefreshData(){if(!autoRefresh)return;renderEquipmentMarkers();updateStatusCounts();}
+    </script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+/* ==================== 数字孪生2.5D效果 ==================== */
+
+/* 2.5D容器 */
+.isometric-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* 2.5D基础卡片 */
+.isometric-card {
+    transform: rotateX(60deg) rotateZ(-45deg);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.isometric-card:hover {
+    transform: rotateX(60deg) rotateZ(-45deg) scale(1.05);
+}
+
+/* ==================== 设备图标 ==================== */
+
+/* 沉淀池(立体效果) */
+.tank-isometric {
+    position: relative;
+    width: 120px;
+    height: 80px;
+    background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+    border-radius: 8px;
+    box-shadow:
+        8px 8px 0 #2c5f8d,
+        16px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: rotateX(45deg);
+    overflow: hidden;
+}
+
+/* 水位效果 */
+.tank-water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(180deg,
+        rgba(74, 144, 226, 0.8) 0%,
+        rgba(53, 122, 189, 0.9) 100%);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+
+/* 波浪动画 */
+.tank-water::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -50%;
+    width: 200%;
+    height: 20px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,60 C150,120 350,0 600,60 C850,120 1050,0 1200,60 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.3)"/></svg>') repeat-x;
+    animation: wave 3s linear infinite;
+}
+
+/* 水泵 */
+.pump-isometric {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #52c41a 0%, #399918 100%);
+    border-radius: 50%;
+    box-shadow:
+        4px 4px 0 #2a7a15,
+        8px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: rotateX(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.pump-isometric.running {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 阀门 */
+.valve-isometric {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #faad14 0%, #d89614 100%);
+    border-radius: 4px;
+    box-shadow:
+        4px 4px 0 #a67d0c,
+        8px 8px 0 rgba(0, 0, 0, 0.2);
+    transform: rotateX(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.valve-isometric.closed {
+    background: linear-gradient(135deg, #f5222d 0%, #d32029 100%);
+    box-shadow:
+        4px 4px 0 #a6171e,
+        8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 传感器 */
+.sensor-isometric {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #13c2c2 0%, #08979c 100%);
+    border-radius: 50%;
+    box-shadow:
+        3px 3px 0 #067a7e,
+        6px 6px 0 rgba(0, 0, 0, 0.2);
+    transform: rotateX(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+/* ==================== 管道系统 ==================== */
+
+/* 管道容器 */
+.pipe-container {
+    position: relative;
+    padding: 20px;
+}
+
+.pipe-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 管道路径 */
+.pipe-path {
+    fill: none;
+    stroke: #4a90e2;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+/* 管道流动动画 */
+.pipe-flow {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.6);
+    stroke-width: 4;
+    stroke-dasharray: 10, 10;
+    animation: pipe-flow 1s linear infinite;
+}
+
+.pipe-flow.slow {
+    animation-duration: 2s;
+}
+
+.pipe-flow.fast {
+    animation-duration: 0.5s;
+}
+
+.pipe-flow.reverse {
+    animation-direction: reverse;
+}
+
+.pipe-flow.stopped {
+    animation: none;
+    opacity: 0.3;
+}
+
+/* 管道连接点 */
+.pipe-connector {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #4a90e2;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* ==================== 暗黑科技背景 ==================== */
+
+/* 深色网格背景 */
+.digitaltwin-bg {
+    background-color: #0a0e27;
+    background-image:
+        linear-gradient(rgba(24, 144, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 144, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 全息扫描效果 */
+.digitaltwin-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(24, 144, 255, 0.03) 50%,
+        transparent 100%
+    );
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ==================== 设备光晕效果 ==================== */
+
+/* 运行状态光晕 */
+.equipment-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.equipment-glow.running {
+    background: radial-gradient(
+        circle at center,
+        rgba(82, 196, 26, 0.4) 0%,
+        transparent 70%
+    );
+    animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.equipment-glow.warning {
+    background: radial-gradient(
+        circle at center,
+        rgba(250, 173, 20, 0.4) 0%,
+        transparent 70%
+    );
+    animation: glow-pulse 1s ease-in-out infinite;
+}
+
+.equipment-glow.error {
+    background: radial-gradient(
+        circle at center,
+        rgba(245, 34, 45, 0.4) 0%,
+        transparent 70%
+    );
+    animation: glow-pulse 0.5s ease-in-out infinite;
+}
+
+/* 光晕脉冲动画 */
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* ==================== HUD数据浮窗 ==================== */
+
+/* 设备容器(带HUD) */
+.equipment-item {
+    position: relative;
+    display: inline-block;
+}
+
+/* HUD浮窗 */
+.equipment-hud {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    width: 280px;
+    background: rgba(10, 14, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(24, 144, 255, 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.equipment-item:hover .equipment-hud {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.hud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.hud-status.running {
+    color: #52c41a;
+}
+
+.hud-status.warning {
+    color: #faad14;
+}
+
+.hud-status.error {
+    color: #f5222d;
+}
+
+.hud-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.metric {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.metric-label {
+    display: block;
+    color: #8c8c8c;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.metric-value {
+    display: block;
+    color: #1890ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.hud-chart {
+    height: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+/* ==================== 2.5D布局 ==================== */
+
+/* 数字孪生主容器 */
+.digitaltwin-container {
+    position: relative;
+    padding: 40px;
+    background: #0a0e27;
+    min-height: calc(100vh - 64px);
+    overflow: hidden;
+}
+
+/* 设备布局网格 */
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 60px;
+    padding: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 设备项 */
+.equipment-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.equipment-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(24, 144, 255, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(24, 144, 255, 0.2);
+}
+
+.equipment-name {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.equipment-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.equipment-status-dot.running {
+    background: #52c41a;
+    box-shadow: 0 0 8px rgba(82, 196, 26, 0.6);
+    animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* ==================== 响应式适配 ==================== */
+
+@media (max-width: 768px) {
+    .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 20px;
+    }
+
+    .equipment-hud {
+        width: 240px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .isometric-card {
+        transform: scale(0.8);
+    }
+}

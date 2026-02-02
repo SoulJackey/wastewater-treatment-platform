@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隧道废水处理智能平台</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/modules.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-water"></i>
+                <span class="logo-text">废水处理平台</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-label">综合看板</div>
+                    <div class="menu-item">
+                        <a href="pages/dashboard-company.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-chart-line"></i></span>
+                            <span class="menu-text">公司级看板</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="pages/dashboard-project.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-chart-bar"></i></span>
+                            <span class="menu-text">项目级看板</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">设备管理</div>
+                    <div class="menu-item">
+                        <a href="pages/device-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-list"></i></span>
+                            <span class="menu-text">设备档案</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">在线监控</div>
+                    <div class="menu-item has-submenu">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-desktop"></i></span>
+                            <span class="menu-text">实时监控</span>
+                            <span class="menu-arrow"><i class="fas fa-chevron-down"></i></span>
+                        </a>
+                        <div class="submenu">
+                            <div class="menu-item">
+                                <a href="pages/monitor-realtime.html" class="menu-link">
+                                    <span class="menu-text">实时数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="pages/monitor-history.html" class="menu-link">
+                                    <span class="menu-text">历史数据</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="pages/monitor-alarm.html" class="menu-link">
+                                    <span class="menu-text">报警管理</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="pages/monitor-video.html" class="menu-link">
+                                    <span class="menu-text">视频监控</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="pages/monitor-digitaltwin.html" class="menu-link">
+                                    <span class="menu-text">数字孪生</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">统计分析</div>
+                    <div class="menu-item">
+                        <a href="pages/report-list.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-file-alt"></i></span>
+                            <span class="menu-text">数据报表</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="pages/report-energy.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-bolt"></i></span>
+                            <span class="menu-text">能耗统计</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-label">系统管理</div>
+                    <div class="menu-item">
+                        <a href="pages/user-manage.html" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-users"></i></span>
+                            <span class="menu-text">人员管理</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link">
+                            <span class="menu-icon"><i class="fas fa-cog"></i></span>
+                            <span class="menu-text">系统设置</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- 侧边栏遮罩（移动端） -->
+        <div class="sidebar-overlay"></div>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部导航栏 -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="toggle-btn" title="切换侧边栏">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <nav class="breadcrumb">
+                        <span class="breadcrumb-item">
+                            <a href="index.html">首页</a>
+                        </span>
+                        <span class="breadcrumb-item">欢迎使用</span>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <button class="header-action notification-btn" title="通知">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-count">3</span>
+                    </button>
+                    <button class="header-action fullscreen-btn" title="全屏">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">A</div>
+                        <div class="user-details">
+                            <div class="user-name">管理员</div>
+                            <div class="user-role">系统管理员</div>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0)" class="header-action logout-btn" title="退出登录">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </header>
+
+            <!-- 内容区域 -->
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <!-- 欢迎页面 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">欢迎使用隧道废水处理智能平台</span>
+                        </div>
+                        <div class="card-body">
+                            <div style="padding: 60px 20px; text-align: center;">
+                                <i class="fas fa-water" style="font-size: 80px; color: var(--primary-color); margin-bottom: 24px;"></i>
+                                <h2 style="margin-bottom: 16px; color: var(--text-primary);">工程建设项目生产生活废污水智能平台</h2>
+                                <p style="margin-bottom: 32px; color: var(--text-secondary); font-size: 16px;">
+                                    管控生活污水、隧道废水、拌合站废水、砂石废水四类处理系统
+                                </p>
+
+                                <div class="row" style="max-width: 1000px; margin: 0 auto 40px;">
+                                    <div class="col-3">
+                                        <div class="card" style="text-align: center; cursor: pointer; transition: all 0.3s;" onclick="window.location.href='pages/dashboard-company.html'">
+                                            <i class="fas fa-chart-line" style="font-size: 40px; color: var(--primary-color); margin-bottom: 16px;"></i>
+                                            <h3 style="margin-bottom: 8px;">公司级看板</h3>
+                                            <p style="color: var(--text-secondary); font-size: 13px;">查看所有项目整体情况</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card" style="text-align: center; cursor: pointer; transition: all 0.3s;" onclick="window.location.href='pages/device-list.html'">
+                                            <i class="fas fa-list" style="font-size: 40px; color: var(--success-color); margin-bottom: 16px;"></i>
+                                            <h3 style="margin-bottom: 8px;">设备档案</h3>
+                                            <p style="color: var(--text-secondary); font-size: 13px;">管理所有设备信息</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card" style="text-align: center; cursor: pointer; transition: all 0.3s;" onclick="window.location.href='pages/monitor-realtime.html'">
+                                            <i class="fas fa-desktop" style="font-size: 40px; color: var(--warning-color); margin-bottom: 16px;"></i>
+                                            <h3 style="margin-bottom: 8px;">实时监控</h3>
+                                            <p style="color: var(--text-secondary); font-size: 13px;">查看设备实时数据</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card" style="text-align: center; cursor: pointer; transition: all 0.3s;" onclick="window.location.href='pages/report-list.html'">
+                                            <i class="fas fa-file-alt" style="font-size: 40px; color: var(--danger-color); margin-bottom: 16px;"></i>
+                                            <h3 style="margin-bottom: 8px;">数据报表</h3>
+                                            <p style="color: var(--text-secondary); font-size: 13px;">查看各类统计报表</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="divider"></div>
+
+                                <div style="max-width: 800px; margin: 0 auto;">
+                                    <h3 style="margin-bottom: 24px;">平台功能</h3>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <ul class="list-unstyled">
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>GIS地图展示：</strong>查看项目地理分布
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>设备管理：</strong>完整的设备档案系统
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>实时监控：</strong>设备运行数据实时查看
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>历史数据：</strong>历史数据查询和导出
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-6">
+                                            <ul class="list-unstyled">
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>报警管理：</strong>实时报警通知和处理
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>视频监控：</strong>远程视频监控
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>数字孪生：</strong>可视化设备布局
+                                                </li>
+                                                <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
+                                                    <i class="fas fa-check-circle" style="position: absolute; left: 0; top: 4px; color: var(--success-color);"></i>
+                                                    <strong>能耗统计：</strong>能耗数据分析
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/data.js"></script>
+</body>
+</html>
